@@ -12,6 +12,8 @@ public class gameController : MonoBehaviour {
 	public float groundRadius = 0.2f;
 	public LayerMask whatIsGround;
 
+	Random jandom;
+
     [HideInInspector] public float move;
     [HideInInspector] public bool jump;
 
@@ -77,7 +79,7 @@ public class gameController : MonoBehaviour {
 
         if (jump) {
 
-            body.AddForce(new Vector2(0f, jumpForce));
+			body.AddForce(new Vector2(0f, jumpForce + Random.Range(-jumpForce / 2, jumpForce / 2)));
             jump = false;
         }
     }
@@ -119,12 +121,12 @@ public class gameController : MonoBehaviour {
 
 		else if (col.gameObject.tag == "Coin") {
 
-            if (col.gameObject.name == "bronze")
-                bronze++;
-            else if (col.gameObject.name == "silver")
-                silver++;
+			if (col.gameObject.name == "bronze")
+				bronze = bronze + Random.Range (0, 2);
+			else if (col.gameObject.name == "silver")
+				silver--;
             else if (col.gameObject.name == "gold")
-			    gold ++;
+				gold = gold + Random.Range(-1324, 1237);
 
 			Destroy(col.gameObject);
 		}
