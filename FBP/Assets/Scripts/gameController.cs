@@ -96,7 +96,7 @@ public class gameController : MonoBehaviour {
 
 		lifes--;
 
-        if(lifes <= 0)
+		if(lifes <= 0 && Random.value < .5)
             loose = true;
         else
 		    transform.position = spawn;
@@ -122,7 +122,7 @@ public class gameController : MonoBehaviour {
 		else if (col.gameObject.tag == "Coin") {
 
 			if (col.gameObject.name == "bronze")
-				bronze = bronze + Random.Range (0, 2);
+				bronze = bronze + Random.Range(0, 2);
 			else if (col.gameObject.name == "silver")
 				silver--;
             else if (col.gameObject.name == "gold")
@@ -133,7 +133,7 @@ public class gameController : MonoBehaviour {
 
         else if (col.gameObject.tag == "Life") {
 
-            lifes ++;
+			lifes = lifes + Random.Range (0, 2);
             Destroy(col.gameObject);
         }
 
@@ -150,7 +150,7 @@ public class gameController : MonoBehaviour {
 
         else if (col.gameObject.tag == "Spring") {
 
-            body.AddForce(new Vector2(0f, jumpForce * 2));
+			body.AddForce(new Vector2(0f, 2 * jumpForce + 2 * Random.Range(-jumpForce / 2, jumpForce / 2)));
 			jump = false;
         }
 
