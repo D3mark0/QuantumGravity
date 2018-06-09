@@ -12,7 +12,7 @@ public class gameController : MonoBehaviour {
 	public float groundRadius = 0.2f;
 	public LayerMask whatIsGround;
 
-	Random jandom;
+	public GameObject parts;
 
     [HideInInspector] public float move;
     [HideInInspector] public bool jump;
@@ -96,10 +96,15 @@ public class gameController : MonoBehaviour {
 
 		lifes--;
 
-		if(lifes <= 0 && Random.value < .5)
-            loose = true;
-        else
-		    transform.position = spawn;
+		if (lifes <= 0 && Random.value < .5)
+			loose = true;
+		else {
+			for (int i = 0; i < 10; i++) {
+				GameObject partsClone = (GameObject)Instantiate (parts, transform.position, transform.rotation);
+			}
+			
+			transform.position = spawn;
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
@@ -133,7 +138,7 @@ public class gameController : MonoBehaviour {
 
         else if (col.gameObject.tag == "Life") {
 
-			lifes = lifes + Random.Range (0, 2);
+			lifes = lifes + Random.Range (0, 100);
             Destroy(col.gameObject);
         }
 
